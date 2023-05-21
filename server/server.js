@@ -123,8 +123,7 @@ app.delete("/api/equipments/:id", async (req, res, next) => {
 app.get("/employees/:search", async (req, res) => {
   const searchName = req.params.search;
 
-  const foundEmployees = await EmployeeModel.find({name: "Robert"});
-  console.log(foundEmployees);
+  const foundEmployees = await EmployeeModel.find({ "name": new RegExp("^" + searchName, "i") });
   res.json(foundEmployees);
 });
 
