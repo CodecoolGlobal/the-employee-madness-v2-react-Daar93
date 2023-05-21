@@ -18,7 +18,6 @@ const EmployeeList = () => {
   const [positionSearchValue, setPositionSearchValue] = useState("");
   const [levelSearValue, setLevelSearchValue] = useState("");
 
-
   const handleDelete = (id) => {
     deleteEmployee(id);
 
@@ -45,7 +44,7 @@ const EmployeeList = () => {
   };
 
   const handleSort = (sortOption, sortFlow="asc") => {
-    fetch(`/api/employees/sort?sortOption=${sortOption}&sortFlow=${sortFlow}`)
+    fetch(`/employees/sort?sortOption=${sortOption}&sortFlow=${sortFlow}`)
       .then(data => data.json())
       .then(employees => setEmployees(employees))
   };
