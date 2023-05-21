@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors")
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const EquipmentModel = require("./db/equipment.model");
@@ -14,6 +15,7 @@ if (!MONGO_URL) {
 const app = express();
 // app.use("/api/employees", employees)
 app.use(express.json());
+app.use(cors());
 
 app.get("/api/employees/sort", async (req, res) => {
   const sortOption = req.query.sortOption;
@@ -116,6 +118,14 @@ app.delete("/api/equipments/:id", async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
+});
+
+app.get("/employees/:search", async (req, res) => {
+  const searchName = req.params.search;
+
+  const foundEmployees = await EmployeeModel.find({name: "Robert"});
+  console.log(foundEmployees);
+  res.json(foundEmployees);
 });
 
 const main = async () => {
