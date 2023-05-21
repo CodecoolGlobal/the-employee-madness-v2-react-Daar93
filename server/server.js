@@ -39,56 +39,6 @@ app.get("/employees/:search", async (req, res) => {
   res.json(foundEmployees);
 });
 
-// Equipments
-
-// app.get("/api/equipments", async (req, res) => {
-//   try {
-//     const equipments = await EquipmentModel.find();
-//     return res.json(equipments);
-//   } catch (err) {
-//     return next(err);
-//   }
-// });
-
-// app.get("/api/equipments/:id", async (req, res) => {
-//   const equipment = await EquipmentModel.findById(req.params.id);
-//   return res.json(equipment);
-// });
-
-// app.post("/api/equipments", async (req, res, next) => {
-//   const equipment = req.body;
-
-//   try {
-//     const saved = await EquipmentModel.create(equipment);
-//     return res.json(saved);
-//   } catch (err) {
-//     return next(err);
-//   }
-// });
-
-// app.patch("/api/equipments/:id", async (req, res, next) => {
-//   try {
-//     const equipment = await EquipmentModel.findOneAndUpdate(
-//       { _id: req.params.id },
-//       { $set: { ...req.body } },
-//       { new: true }
-//     );
-//     return res.json(equipment);
-//   } catch (err) {
-//     return next(err);
-//   }
-// });
-
-// app.delete("/api/equipments/:id", async (req, res, next) => {
-//   try {
-//     const equipment = await EquipmentModel.findById(req.params.id);
-//     const deleted = await equipment.delete();
-//     return res.json(deleted);
-//   } catch (err) {
-//     return next(err);
-//   }
-// });
-
 const main = async () => {
   await mongoose.connect(MONGO_URL);
 
