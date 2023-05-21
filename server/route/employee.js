@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const EmployeeModel = require("../db/employee.model");
 
 // router.use((req, res, next) => {
@@ -11,15 +10,6 @@ const EmployeeModel = require("../db/employee.model");
 router.get("/", async (req, res) => {
     const employees = await EmployeeModel.find().sort({ created: "desc" });
     return res.json(employees);
-});
-
-router.get("/sort", async (req, res) => {
-    const sortOption = req.query.sortOption;
-    const sortFlow = req.query.sortFlow;
-
-    const sortedEmployees = await EmployeeModel.find().sort({[sortOption]: sortFlow})
-
-    return res.json(sortedEmployees);
 });
 
 router.get("/:id", async (req, res) => {
