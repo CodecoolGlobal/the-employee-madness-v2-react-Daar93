@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
+import Loading from "../Components/Loading";
 
+import EmployeeTable from "../Components/EmployeeTable";
 
 export default function EmployeeFinder() {
-    const [foundEmployee, setFoundEmployees] = useState(null);
+    const [foundEmployees, setFoundEmployees] = useState(null);
 
+    
     useEffect(() => {
-        console.log(window.location.href.lastIndexOf("/"));
-        const nameToSearch = window.location.href;
-        const searchValue = nameToSearch.slice(nameToSearch.lastIndexOf("/") + 1);
-        console.log(searchValue);
+        const completeUrl = window.location.href;
+        const searchValue = completeUrl.slice(completeUrl.lastIndexOf("/") + 1);
 
-        console.log(searchValue)
         fetch("http://localhost:8080/employees/" + searchValue)
             .then(data => data.json())
             .then(employees => {
-                console.log(employees);
+                setFoundEmployees(employees);
             })
-
     }, []);
 
-    return <>Halloooo</>
+    if(!foundEmployees) {
+        return <Loading />
+    }
+
+    return <>
+        <EmployeeTable 
+            employees={foundEmployees}
+            />
+    </>
 };
