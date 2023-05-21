@@ -44,73 +44,10 @@ const EmployeeList = () => {
     }
   };
 
-  // function handleSortByFirstName(event) {
-  //   event.preventDefault();
-
-  //   // setEmployees(() => {
-  //   //   return employees.reduce((sortedEmployees, employee) => {
-  //   //     let index = 0;
-  //   //     const employeeFirstName = employee.name.substring(0, employee.name.indexOf(" "));        
-
-  //   //     while(index < sortedEmployees.length && employeeFirstName > sortedEmployees[index].name.substring(0, sortedEmployees[index].name.indexOf(" "))) index++;
-  //   //     sortedEmployees.splice(index, 0, employee);
-  //   //     return sortedEmployees;
-  //   //   }, []);
-  //   // });
-
-  //   fetch()
-  // }
-
-  // function handleSortByLastName(event) {
-  //   event.preventDefault();
-
-  //   setEmployees(() => {
-  //     return employees.reduce((sortedEmployees, employee) => {
-  //       let index = 0;
-  //       const employeeLastName = employee.name.substring(employee.name.lastIndexOf(" "), employee.length);        
-
-  //       while(index < sortedEmployees.length && employeeLastName > sortedEmployees[index].name.substring(sortedEmployees[index].name.lastIndexOf(" "), sortedEmployees[index].name.length)) index++;
-  //       sortedEmployees.splice(index, 0, employee);
-  //       return sortedEmployees;
-  //     }, []);
-  //   });
-  // }
-
-  // function handleSortByPosition(event) {
-  //   event.preventDefault();
-
-  //   setEmployees(() => {
-  //     return employees.reduce((sortedEmployees, employee) => {
-  //       let index = 0;
-  //       const position = employee.position;
-
-  //       while(index < sortedEmployees.length && position >   sortedEmployees[index].position) index++;
-  //       sortedEmployees.splice(index, 0, employee);
-  //       return sortedEmployees;
-  //     }, []);
-  //   })
-  // }
-
-  // function handleSortByLevel(event) {
-  //   event.preventDefault();
-
-  //   setEmployees(() => {
-  //     return employees.reduce((sortedEmployees, employee) => {
-  //       let index = 0;
-  //       const level = employee.level;
-
-  //       while(index < sortedEmployees.length && employee.level > sortedEmployees[index].level) index++;
-  //       sortedEmployees.splice(index, 0, employee);
-  //       return sortedEmployees;
-  //     }, []);
-  //   })
-  // }
-
   const handleSort = (sortOption, sortFlow="asc") => {
-
-    fetch("/employees/sort" + `?sortOption=${sortOption}&sortFlow=${sortFlow}`)
-     .then(data => data.json())
-     .then(books => setEmployees(books))
+    fetch(`/api/employees/sort?sortOption=${sortOption}&sortFlow=${sortFlow}`)
+      .then(data => data.json())
+      .then(employees => setEmployees(employees))
   };
 
   useEffect(() => {
@@ -144,10 +81,6 @@ const EmployeeList = () => {
       className="name"
       onClick={ () => handleSort("name") }
     >Sort by first name</button>
-    <button
-      className="name"
-      onClick={ () => console.log("Hallo") }
-    >Sort by last name</button>
     <button
       className="position"
       onClick={ () => handleSort("position") }
