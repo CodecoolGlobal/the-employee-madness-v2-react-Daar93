@@ -1,23 +1,32 @@
 const express = require("express");
-const app = express();
 const router = express.Router();
+const mongoose = require("mongoose");
 const EmployeeModel = require("../db/employee.model");
 
-app.use(express.json());
-router.use((req, res, next) => {
-    console.log('Time: ', Date.now())
-    next()
-  })
+// router.use((req, res, next) => {
+//     console.log('Time: ', Date.now())
+//     next()
+// })
 
 router.get("/", async (req, res) => {
     const employees = await EmployeeModel.find().sort({ created: "desc" });
     return res.json(employees);
 });
 
+router.get("/sort", async (req, res) => {
+    const sortOption = req.query.sortOption;
+    const sortFlow = req.query.sortFlow;
+
+    const sortedEmployees = await EmployeeModel.find().sort({[sortOption]: sortFlow})
+
+    return res.json(sortedEmployees);
+});
+
 router.get("/:id", async (req, res) => {
     const employee = await EmployeeModel.findById(req.params.id)
     return res.json(employee);
 });
+
 
 router.post("/", async (req, res) => {
     const employee = req.body;
@@ -53,4 +62,4 @@ router.delete(":id", async (req, res) => {
     }
 });
 
-exports.modules = router;
+module.exports = router;
