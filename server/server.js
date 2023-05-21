@@ -3,8 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
 const EquipmentModel = require("./db/equipment.model");
-// const employeeModel = require("./db/employee.model");
-// const employees = require("./route/employee");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -17,16 +15,13 @@ const app = express();
 // app.use("/api/employees", employees)
 app.use(express.json());
 
-app.get("/employees/sort", async (req, res) => {
+app.get("/api/employees/sort", async (req, res) => {
   const sortOption = req.query.sortOption;
   const sortFlow = req.query.sortFlow;
 
-  const sortedEmployees = await EmployeeModel.find().sort({[sortOption]: sortFlow});
+  const sortedEmployees = await EmployeeModel.find().sort({[sortOption]: sortFlow})
 
-  console.log(sortOption);
-  console.log(sortFlow);
-
-  res.json(sortedEmployees);
+  return res.json(sortedEmployees);
 });
 
 app.get("/api/employees/", async (req, res) => {
