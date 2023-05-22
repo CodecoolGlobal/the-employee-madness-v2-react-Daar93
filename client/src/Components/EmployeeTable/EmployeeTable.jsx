@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete }) => (
+const EmployeeTable = ({ employees, onDelete, onSimilarEmployees }) => (
+  
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -24,6 +25,9 @@ const EmployeeTable = ({ employees, onDelete }) => (
               </Link>
               <button type="button" onClick={() => onDelete(employee._id)}>
                 Delete
+              </button>
+              <button type="button" onClick={() => onSimilarEmployees(employee.position, employee.level)}>
+                Similar Employees
               </button>
             </td>
           </tr>

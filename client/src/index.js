@@ -12,6 +12,7 @@ import EquipmentList from "./Pages/EquipmentList";
 import EquipmentCreator from "./Pages/EquipmentCreator";
 import EquipmentUpdater from "./Pages/EquipmentUpdater";
 import EmployeeFinder from "./Pages/EmployeeFinder.jsx";
+import SearchEmployess from "./Pages/SearchEmployees";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/employee/:search",
         element: <EmployeeFinder />
+      },
+      {
+        path: "/search/employee",
+        element: <SearchEmployess />
       }
     ],
   },
