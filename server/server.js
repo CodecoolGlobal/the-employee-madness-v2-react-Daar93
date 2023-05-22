@@ -23,6 +23,12 @@ app.use(cors());
 app.use("/api/employees", routerEmployees);
 app.use("/api/equipments", routerEquipments);
 
+// Create a new page where we can search for employees by name. Create one input field with a label “Employee Name”. When the user types into this field you need to list the employees with a name starts with the input field value.
+
+// Display the employee name and level and position and a button with text: Similar Employees. 
+
+// When the user clicks on the similar button, you need to update the list with the employees has same level and position as the selected one.
+
 app.get("/employees/sort", async (req, res) => {
   const sortOption = req.query.sortOption;
   const sortFlow = req.query.sortFlow;
@@ -31,6 +37,33 @@ app.get("/employees/sort", async (req, res) => {
 
   return res.json(sortedEmployees);
 });
+
+app.get("/search/empolyees", async (req, res) => {
+  const searchName = req.query.searchName;
+
+  const employees = await EmployeeModel.find({ "name": new RegExp("^" + searchName, "i") });
+
+  return res.json(employees);
+});
+
+app.get("/search/similar/employees", async (req, res) => {
+  const level = req.query.level;
+  const position = req.query.position;
+
+  console.log(level, position);
+  const employees = await EmployeeModel.find({ 
+    $and: [
+      {
+        position: position
+      },
+      {
+        level: level
+      }
+    ]
+   });
+
+  return res.json(employees);
+})
 
 app.get("/employees/:search", async (req, res) => {
   const searchName = req.params.search;

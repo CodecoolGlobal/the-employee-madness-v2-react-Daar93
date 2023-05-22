@@ -20,6 +20,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     const employee = req.body;
+    console.log(employee);
 
     try {
         const saved = await EmployeeModel.create(employee);
